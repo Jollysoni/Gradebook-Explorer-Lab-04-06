@@ -1,0 +1,264 @@
+/* src/css/spreadsheet.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ── Variables ─────────────────────────────────────────── */
+:root {
+  --bg:            #eef0f5;
+  --surface:       #ffffff;
+  --border:        #d8dce6;
+  --border-light:  #e8eaf0;
+  --text:          #1a1f2e;
+  --text-muted:    #6b7280;
+  --header-bg:     #1a1f2e;
+
+  /* Required by spec */
+  --col-header-bg: #d0d0d0;
+  --selected-bg:   #e0e0ff;
+
+  --radius: 10px;
+  --font:   'Inter', system-ui, sans-serif;
+}
+
+/* ── Reset ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+/* ── Page Header ────────────────────────────────────────── */
+.page-header {
+  background: var(--header-bg);
+  color: #fff;
+  padding: 24px 32px 22px;
+}
+
+.page-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.page-header .subtitle {
+  font-size: 0.85rem;
+  color: #a0a8b8;
+  font-weight: 400;
+}
+
+/* ── Page body ──────────────────────────────────────────── */
+.page-body {
+  max-width: 1100px;
+  margin: 28px auto;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Card ───────────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: var(--text);
+}
+
+/* ── Summary Panel ──────────────────────────────────────── */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+
+.summary-cell {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px 14px;
+}
+
+.summary-cell-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+
+.summary-cell-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ── Instructions Box ───────────────────────────────────── */
+.instructions-box {
+  background: #f5f6fa;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-top: 18px;
+}
+
+.instructions-box h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.instructions-box ul {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.instructions-box li {
+  font-size: 0.82rem;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.instructions-box strong {
+  font-weight: 600;
+}
+
+/* ── Gradebook Table Card ───────────────────────────────── */
+.table-scroll {
+  overflow-x: auto;
+}
+
+/* ── Gradebook Table ────────────────────────────────────── */
+#gradebook-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.875rem;
+}
+
+#gradebook-table th,
+#gradebook-table td {
+  padding: 10px 16px;
+  text-align: center;
+  border: 1px solid var(--border-light);
+  white-space: nowrap;
+}
+
+/* Column headers */
+#gradebook-table thead th {
+  background: var(--col-header-bg);
+  font-weight: 600;
+  font-size: 0.83rem;
+  color: #2d3140;
+  cursor: pointer;
+  user-select: none;
+}
+
+#gradebook-table thead th:hover {
+  background: #bebebe;
+}
+
+/* Corner cell */
+#gradebook-table thead th.corner-cell {
+  cursor: default;
+}
+#gradebook-table thead th.corner-cell:hover {
+  background: var(--col-header-bg);
+}
+
+/* Row headers */
+#gradebook-table tbody th {
+  background: var(--col-header-bg);
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  color: #2d3140;
+}
+
+#gradebook-table tbody th:hover {
+  background: #bebebe;
+}
+
+/* Grade cells */
+#gradebook-table tbody td {
+  background: #fff;
+  color: var(--text);
+}
+
+/* Selected — required by spec */
+#gradebook-table tbody td.selected {
+  background: var(--selected-bg);
+}
+
+@media (max-width: 700px) {
+  .summary-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ── Cell editing (Lab 05) ──────────────────────────────── */
+
+/* the input that replaces a grade cell when you click it */
+.cell-input {
+  width: 100%;
+  height: 100%;
+  padding: 0 6px;
+  border: 2px solid #a0aee8;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: inherit;
+  text-align: center;
+  background: #fff;
+  color: var(--text);
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* blue glow on focus — matches the style in Fig 4 */
+.cell-input:focus {
+  border-color: #5b7be8;
+  box-shadow: 0 0 0 3px rgba(91, 123, 232, 0.15);
+}
+
+/* make the td a positioning context so the input fills it exactly */
+#gradebook-table tbody td:has(input) {
+  padding: 0;
+}
+
+/* ── D3 Chart (Lab 06) ──────────────────────────────────── */
+
+/* the SVG fills the card width; height is set by D3 at render time */
+.chart-svg {
+  width: 100%;
+  display: block;
+}
+
+/* D3 axis text */
+.chart-svg text {
+  font-family: var(--font);
+  font-size: 12px;
+  fill: #444;
+}
+
+/* ── Chart container inner (Lab 06 fix) ─────────────────── */
+.chart-container-inner {
+  width: 100%;
+  min-height: 240px;
+}
+
+.chart-container-inner svg {
+  display: block;
+}
+
+.chart-container-inner text {
+  font-family: var(--font);
+  font-size: 12px;
+}
