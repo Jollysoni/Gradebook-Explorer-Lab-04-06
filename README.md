@@ -16,7 +16,7 @@ Loads a CSV of student grades and displays them in an interactive table. You can
 ## How to run it
 
 ### Option 1 — GitHub Pages (easiest)
-Just visit the live site: `https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/`
+Just visit the live site: `[https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/](https://jollysoni.github.io/Gradebook-Explorer-Lab-04-06/src/pages/spreadsheet.html)`
 
 ### Option 2 — Local server
 ```bash
